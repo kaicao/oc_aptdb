@@ -1,8 +1,48 @@
 [build]
   publish = "."
   command = "echo 'Static site ready for deployment'"
+  
+[build.environment]
+  NODE_VERSION = "18"
+  
+[[redirects]]
+  from = "/api/*"
+  to = "https://oslo-apartments-api.netlify.app/:splat"
+  status = 200
+  force = true
 
+[[redirects]]
+  from = "/apartments"
+  to = "https://oslo-apartments-api.netlify.app/apartments"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/apartments/*"
+  to = "https://oslo-apartments-api.netlify.app/apartments/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/analytics/*"
+  to = "https://oslo-apartments-api.netlify.app/analytics/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/districts"
+  to = "https://oslo-apartments-api.netlify.app/districts"
+  status = 200
+  force = true
+
+# Handle React Router (SPA)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[context.production.environment]
+  API_BASE_URL = "https://oslo-apartments-api.netlify.app"
+
+[context.deploy-preview.environment]
+  API_BASE_URL = "http://localhost:8000"
