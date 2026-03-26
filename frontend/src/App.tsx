@@ -108,7 +108,7 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
     
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center p-8 bg-white rounded-lg shadow-sm border max-w-md">
+        <div className="text-center p-8 bg-white rounded-xl shadow-xl border border-gray-100 max-w-md backdrop-blur-sm">
           <h2 className="text-xl font-semibold text-red-600 mb-4">{t('something_went_wrong')}</h2>
           <p className="text-gray-600 mb-4">{error || 'An unexpected error occurred'}</p>
           <button 
@@ -177,10 +177,10 @@ function MapComponent({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border">
-      <div className="p-4 border-b">
-        <h2 className="text-lg font-semibold flex items-center">
-          <MapPin className="w-5 h-5 mr-2" />
+    <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+      <div className="p-6 border-b bg-gradient-to-r from-slate-50 to-blue-50">
+        <h2 className="text-xl font-bold text-gray-900 flex items-center">
+          <MapPin className="w-6 h-6 mr-2 text-indigo-600" />
           {t('apartment_locations')} ({apartments.length})
         </h2>
       </div>
@@ -482,17 +482,22 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b">
+        <header className="bg-white shadow-lg border-b border-gray-100 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <Home className="w-8 h-8 text-blue-600 mr-3" />
+                <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                  <Home className="w-6 h-6 text-white" />
+                </div>
                 <div>
                   <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
                   <p className="text-sm text-gray-600">{t('subtitle')}</p>
-                  <p className="text-xs text-yellow-600 font-medium">⚠️ Demo Data - Not Real Norwegian Real Estate Listings</p>
+                  <div className="flex items-center mt-1">
+                    <div className="w-2 h-2 bg-amber-400 rounded-full mr-2 animate-pulse"></div>
+                    <p className="text-xs text-amber-600 font-medium">Demo Data - Not Real Norwegian Real Estate</p>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -529,21 +534,23 @@ function App() {
 
         <div className="max-w-7xl mx-auto px-4 py-6">
           {/* Demo Data Notice */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+          <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 mb-6 shadow-lg backdrop-blur-sm">
             <div className="flex items-start">
               <div className="flex-shrink-0">
-                <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
+                <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                  </svg>
+                </div>
               </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-yellow-800">
+              <div className="ml-4">
+                <h3 className="text-base font-semibold text-amber-900 mb-1">
                   Demo Data Notice
                 </h3>
-                <div className="mt-2 text-sm text-yellow-700">
+                <div className="text-sm text-amber-800 leading-relaxed">
                   <p>
-                    This website displays <strong>simulated/mock apartment data</strong> for demonstration purposes. 
-                    All apartment listings, prices, and transaction history are <strong>not real</strong> and should not be used for actual real estate decisions.
+                    This website displays <strong>simulated apartment data</strong> for demonstration purposes. 
+                    All listings, prices, and transaction history are <strong>not real</strong> and should not be used for actual real estate decisions.
                   </p>
                 </div>
               </div>
@@ -551,43 +558,46 @@ function App() {
           </div>
 
           {/* Search Filters */}
-          <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-            <h2 className="text-lg font-semibold mb-4">{t('search_filters')}</h2>
+          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 mb-8 backdrop-blur-sm">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <Search className="w-6 h-6 mr-2 text-indigo-600" />
+              {t('search_filters')}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">{t('address')}</label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50/50 backdrop-blur-sm transition-all duration-200"
                   placeholder={t('search_address_placeholder')}
                   value={searchFilters.address}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, address: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('district')}</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('district')}</label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50/50 backdrop-blur-sm transition-all duration-200"
                   placeholder={t('district_placeholder')}
                   value={searchFilters.district}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, district: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('from_date')}</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('from_date')}</label>
                 <input
                   type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50/50 backdrop-blur-sm transition-all duration-200"
                   value={searchFilters.start_date}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, start_date: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">{t('to_date')}</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('to_date')}</label>
                 <input
                   type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-gray-50/50 backdrop-blur-sm transition-all duration-200"
                   value={searchFilters.end_date}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, end_date: e.target.value }))}
                 />
@@ -597,72 +607,80 @@ function App() {
               <button
                 onClick={handleSearch}
                 disabled={isLoading}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center disabled:opacity-50"
+                className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white px-8 py-3 rounded-xl flex items-center disabled:opacity-50 shadow-lg transition-all duration-200"
               >
-                <Search className="w-4 h-4 mr-2" />
+                <Search className="w-5 h-5 mr-2" />
                 {t('search')}
               </button>
               <button
                 onClick={handleReset}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-md"
+                className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-8 py-3 rounded-xl border border-gray-200 transition-all duration-200"
               >
                 {t('reset')}
               </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Table */}
-            <div className="bg-white rounded-lg shadow-sm border">
-              <div className="p-4 border-b">
-                <h2 className="text-lg font-semibold">
+            <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="p-6 border-b bg-gradient-to-r from-slate-50 to-blue-50">
+                <h2 className="text-xl font-bold text-gray-900 flex items-center">
+                  <Home className="w-6 h-6 mr-2 text-indigo-600" />
                   {t('apartments')} ({apartments.length})
+                  <span className="text-sm font-medium text-amber-600 ml-3 px-3 py-1 bg-amber-100 rounded-full">
+                    DEMO DATA
+                  </span>
                 </h2>
               </div>
               {isLoading ? (
-                <div className="flex items-center justify-center py-12">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                <div className="flex items-center justify-center py-16">
+                  <div className="relative">
+                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-200"></div>
+                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-indigo-600 border-t-transparent absolute top-0 left-0"></div>
+                  </div>
+                  <p className="mt-4 text-gray-600 font-medium">{t('loading_apartments')}</p>
                 </div>
               ) : (
                 <>
-                  <div className="overflow-x-auto max-h-96">
+                  <div className="overflow-x-auto max-h-[500px]">
                     <table className="w-full">
-                      <thead className="bg-gray-50 sticky top-0">
+                      <thead className="bg-gradient-to-r from-gray-50 to-slate-50 sticky top-0">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('address')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('address')}>
                             <div className="flex items-center">
                               {t('table_headers.address')}
-                              {getSortIcon('address')}
+                              <div className="ml-1">{getSortIcon('address')}</div>
                             </div>
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('price')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('price')}>
                             <div className="flex items-center">
                               {t('table_headers.price')}
-                              {getSortIcon('price')}
+                              <div className="ml-1">{getSortIcon('price')}</div>
                             </div>
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('transaction_date')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('transaction_date')}>
                             <div className="flex items-center">
                               {t('table_headers.date')}
-                              {getSortIcon('transaction_date')}
+                              <div className="ml-1">{getSortIcon('transaction_date')}</div>
                             </div>
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('area_sqm')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('area_sqm')}>
                             <div className="flex items-center">
                               {t('table_headers.area')}
-                              {getSortIcon('area_sqm')}
+                              <div className="ml-1">{getSortIcon('area_sqm')}</div>
                             </div>
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('district')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('district')}>
                             <div className="flex items-center">
                               {t('table_headers.district')}
-                              {getSortIcon('district')}
+                              <div className="ml-1">{getSortIcon('district')}</div>
                             </div>
                           </th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('bedrooms')}>
+                          <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider cursor-pointer hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200" onClick={() => handleSort('bedrooms')}>
                             <div className="flex items-center">
                               {t('table_headers.bedrooms')}
-                              {getSortIcon('bedrooms')}
+                              <div className="ml-1">{getSortIcon('bedrooms')}</div>
                             </div>
                           </th>
                         </tr>
@@ -671,31 +689,37 @@ function App() {
                         {sortedApartments.map((apartment) => (
                           <tr
                             key={apartment.id}
-                            className={`hover:bg-gray-50 cursor-pointer ${
-                              selectedApartment?.id === apartment.id ? 'bg-blue-50 border-l-4 border-blue-500' : ''
+                            className={`hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 cursor-pointer transition-all duration-200 ${
+                              selectedApartment?.id === apartment.id ? 'bg-gradient-to-r from-indigo-100 to-blue-100 border-l-4 border-indigo-500' : ''
                             }`}
                             onClick={() => handleApartmentClick(apartment)}
                           >
-                            <td className="px-4 py-4">
+                            <td className="px-6 py-5">
                               <div>
-                                <div className="text-sm font-medium text-gray-900">{apartment.address}</div>
-                                <div className="text-sm text-gray-500">{apartment.district}</div>
+                                <div className="text-sm font-semibold text-gray-900">{apartment.address}</div>
+                                <div className="text-sm text-indigo-600 font-medium">{apartment.district}</div>
                               </div>
                             </td>
-                            <td className="px-4 py-4 text-sm font-medium text-gray-900">
-                              {formatPrice(apartment.price)}
+                            <td className="px-6 py-5">
+                              <div className="text-sm font-bold text-gray-900">{formatPrice(apartment.price)}</div>
                             </td>
-                            <td className="px-4 py-4 text-sm text-gray-500">
-                              {formatDate(apartment.transaction_date)}
+                            <td className="px-6 py-5">
+                              <div className="text-sm text-gray-600">{formatDate(apartment.transaction_date)}</div>
                             </td>
-                            <td className="px-4 py-4 text-sm text-gray-500">
-                              {apartment.area_sqm} m²
+                            <td className="px-6 py-5">
+                              <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                {apartment.area_sqm} m²
+                              </div>
                             </td>
-                            <td className="px-4 py-4 text-sm text-gray-500">
-                              {apartment.district}
+                            <td className="px-6 py-5">
+                              <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                {apartment.district}
+                              </div>
                             </td>
-                            <td className="px-4 py-4 text-sm text-gray-500">
-                              {apartment.bedrooms}
+                            <td className="px-6 py-5">
+                              <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                {apartment.bedrooms} BR
+                              </div>
                             </td>
                           </tr>
                         ))}
@@ -739,8 +763,8 @@ function App() {
 
         {/* Transaction History Modal */}
         {showHistory && selectedApartment && transactionHistory && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4" style={{ zIndex: 9999, position: 'fixed' }}>
-            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4" style={{ zIndex: 9999, position: 'fixed' }}>
+            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border border-gray-100">
               <div className="p-6 border-b">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-semibold">{t('transaction_history')}</h3>
