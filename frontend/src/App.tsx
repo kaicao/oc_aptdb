@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { MapPin, Home, Search, Download, ChevronLeft, ChevronRight, Globe } from 'lucide-react'
+import { MapPin, Home, Search, Download, ChevronLeft, ChevronRight, Globe, ChevronUp, ChevronDown } from 'lucide-react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import axios from 'axios'
@@ -251,8 +251,59 @@ function App() {
     start_date: '',
     end_date: ''
   })
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' } | null>(null)
 
   const itemsPerPage = 25
+
+  // Sorting function
+  const handleSort = (key: string) => {
+    let direction: 'asc' | 'desc' = 'asc'
+    
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc'
+    }
+    
+    setSortConfig({ key, direction })
+  }
+
+  // Get sorted apartments
+  const sortedApartments = React.useMemo(() => {
+    if (!sortConfig) return apartments
+
+    return [...apartments].sort((a, b) => {
+      const aValue = a[sortConfig.key as keyof Apartment]
+      const bValue = b[sortConfig.key as keyof Apartment]
+
+      if (aValue === null || aValue === undefined) return 1
+      if (bValue === null || bValue === undefined) return -1
+
+      if (sortConfig.key === 'price' || sortConfig.key === 'area_sqm' || sortConfig.key === 'bedrooms' || sortConfig.key === 'bathrooms') {
+        const numA = Number(aValue)
+        const numB = Number(bValue)
+        return sortConfig.direction === 'asc' ? numA - numB : numB - numA
+      } else if (sortConfig.key === 'transaction_date') {
+        const dateA = new Date(aValue as string).getTime()
+        const dateB = new Date(bValue as string).getTime()
+        return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA
+      } else {
+        const strA = String(aValue).toLowerCase()
+        const strB = String(bValue).toLowerCase()
+        if (strA < strB) return sortConfig.direction === 'asc' ? -1 : 1
+        if (strA > strB) return sortConfig.direction === 'asc' ? 1 : -1
+        return 0
+      }
+    })
+  }, [apartments, sortConfig])
+
+  // Get sort icon
+  const getSortIcon = (columnKey: string) => {
+    if (!sortConfig || sortConfig.key !== columnKey) {
+      return <ChevronUp className="w-4 h-4 text-gray-400" />
+    }
+    return sortConfig.direction === 'asc' 
+      ? <ChevronUp className="w-4 h-4 text-blue-600" />
+      : <ChevronDown className="w-4 h-4 text-blue-600" />
+  }
 
   useEffect(() => {
     loadApartments()
@@ -537,14 +588,46 @@ function App() {
                     <table className="w-full">
                       <thead className="bg-gray-50 sticky top-0">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.address')}</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.price')}</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.date')}</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.area')}</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('address')}>
+                            <div className="flex items-center">
+                              {t('table_headers.address')}
+                              {getSortIcon('address')}
+                            </div>
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('price')}>
+                            <div className="flex items-center">
+                              {t('table_headers.price')}
+                              {getSortIcon('price')}
+                            </div>
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('transaction_date')}>
+                            <div className="flex items-center">
+                              {t('table_headers.date')}
+                              {getSortIcon('transaction_date')}
+                            </div>
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('area_sqm')}>
+                            <div className="flex items-center">
+                              {t('table_headers.area')}
+                              {getSortIcon('area_sqm')}
+                            </div>
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('district')}>
+                            <div className="flex items-center">
+                              {t('table_headers.district')}
+                              {getSortIcon('district')}
+                            </div>
+                          </th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100" onClick={() => handleSort('bedrooms')}>
+                            <div className="flex items-center">
+                              {t('table_headers.bedrooms')}
+                              {getSortIcon('bedrooms')}
+                            </div>
+                          </th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
-                        {apartments.map((apartment) => (
+                        {sortedApartments.map((apartment) => (
                           <tr
                             key={apartment.id}
                             className={`hover:bg-gray-50 cursor-pointer ${
@@ -566,6 +649,12 @@ function App() {
                             </td>
                             <td className="px-4 py-4 text-sm text-gray-500">
                               {apartment.area_sqm} m²
+                            </td>
+                            <td className="px-4 py-4 text-sm text-gray-500">
+                              {apartment.district}
+                            </td>
+                            <td className="px-4 py-4 text-sm text-gray-500">
+                              {apartment.bedrooms}
                             </td>
                           </tr>
                         ))}

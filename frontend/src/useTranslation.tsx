@@ -24,9 +24,12 @@ const translations: Record<Language, Translation> = {
     apartments: "Leiligheter",
     table_headers: {
       address: "Adresse",
-      price: "Pris",
+      price: "Pris", 
       date: "Dato",
-      area: "Areal"
+      area: "Areal",
+      district: "Bydel",
+      bedrooms: "Soverom",
+      bathrooms: "Bad"
     },
     page_of: "Side {{current}} av {{total}}",
     apartment_locations: "Leilighet Plasseringer",
@@ -68,7 +71,10 @@ const translations: Record<Language, Translation> = {
       address: "Address",
       price: "Price",
       date: "Date",
-      area: "Area"
+      area: "Area",
+      district: "District", 
+      bedrooms: "Bedrooms",
+      bathrooms: "Bathrooms"
     },
     page_of: "Page {{current}} of {{total}}",
     apartment_locations: "Apartment Locations",
@@ -110,7 +116,10 @@ const translations: Record<Language, Translation> = {
       address: "地址",
       price: "价格",
       date: "日期",
-      area: "面积"
+      area: "面积",
+      district: "区域",
+      bedrooms: "卧室",
+      bathrooms: "浴室"
     },
     page_of: "第 {{current}} 页，共 {{total}} 页",
     apartment_locations: "公寓位置",
