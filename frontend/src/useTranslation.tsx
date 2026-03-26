@@ -32,13 +32,12 @@ const translations: Record<Language, Translation> = {
     district_prices: "Priser per bydel",
     apartment_count: "Leilighet antall",
     district_statistics: "Detaljerte bydelstatistikker",
-    district: "Bydel",
     avg_price: "Gjennomsnittspris",
     min_price: "Minste pris",
     max_price: "Høyeste pris",
     table_headers: {
       address: "Adresse",
-      price: "Pris", 
+      price: "Pris",
       date: "Dato",
       area: "Areal",
       district: "Bydel",
@@ -91,16 +90,15 @@ const translations: Record<Language, Translation> = {
     district_prices: "Average Prices by District",
     apartment_count: "Apartment Count",
     district_statistics: "Detailed District Statistics",
-    district: "District",
     avg_price: "Average Price",
-    min_price: "Minimum Price",
+    min_price: "Minimum Price", 
     max_price: "Maximum Price",
     table_headers: {
       address: "Address",
       price: "Price",
       date: "Date",
       area: "Area",
-      district: "District", 
+      district: "District",
       bedrooms: "Bedrooms",
       bathrooms: "Bathrooms"
     },
@@ -138,7 +136,7 @@ const translations: Record<Language, Translation> = {
     search: "搜索",
     reset: "重置",
     search_address_placeholder: "搜索地址...",
-    district_placeholder: "例如：Frogner",
+    district_placeholder: "例如:Frogner",
     apartments: "公寓",
     table_headers: {
       address: "地址",
@@ -149,7 +147,7 @@ const translations: Record<Language, Translation> = {
       bedrooms: "卧室",
       bathrooms: "浴室"
     },
-    page_of: "第 {{current}} 页，共 {{total}} 页",
+    page_of: "第 {{current}} 页,共 {{total}} 页",
     apartment_locations: "公寓位置",
     map_error: "地图暂时无法使用",
     try_again: "重试",
@@ -188,11 +186,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const t = (key: string, params?: Record<string, any>): string => {
     const keys = key.split('.')
     let value: any = translations[language]
-    
+
     for (const k of keys) {
       value = value?.[k]
     }
-    
+
     if (typeof value !== 'string') {
       // Fallback to Norwegian if translation not found
       value = translations['no']
@@ -200,18 +198,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         value = value?.[k]
       }
     }
-    
+
     if (typeof value !== 'string') {
       return key // Return key if not found
     }
-    
+
     // Replace placeholders like {{start}}
     if (params) {
       return value.replace(/\{\{(\w+)\}\}/g, (match, key) => {
         return params[key]?.toString() || match
       })
     }
-    
+
     return value
   }
 

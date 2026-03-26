@@ -10,7 +10,7 @@ import {
   fetchApartments as fetchApartmentsAPI, 
   fetchApartmentHistory
 } from './mockData'
-import Analytics from './components/Analytics'
+// import Analytics from './components/Analytics'
 
 // Create custom apartment icon
 const apartmentIcon = new L.Icon({
@@ -509,7 +509,7 @@ function App() {
                     className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 transition-colors"
                   >
                     <BarChart3 className="w-4 h-4 mr-1" />
-                    {t('analytics') || 'Analytics'}
+                    {/* {t('analytics') || 'Analytics'} */}
                   </Link>
                 </nav>
                 <div className="text-right">
@@ -800,7 +800,7 @@ function AppWithRouter() {
     <Router>
       <Routes>
         <Route path="/" element={<ApartmentListApp />} />
-        <Route path="/analytics" element={<Analytics />} />
+        {/* <Route path="/analytics" element={<Analytics />} /> */}
       </Routes>
     </Router>
   )
