@@ -1,151 +1,151 @@
 ID,Address,District,Price,Date,Area_sqm,Bedrooms
-1,"Arendalsgata 87, 0101 Oslo",Grevling,4888771,2024-07-26,204,4
-2,"Grensen 148, 0152 Oslo",Bjerke,3232823,2023-11-17,120,4
-3,"Markveien 183, 0250 Oslo",Rodeløkka,5064006,2024-10-03,236,6
-4,"Øvre Slottsgate 180, 0251 Oslo",Sagene,5563837,2021-12-26,117,5
-5,"Bjølsens gate 192, 0104 Oslo",St Hanshaugen,7839891,2024-05-27,105,4
-6,"Briskebyveien 19, 0103 Oslo",Ullern,4704953,2021-08-05,73,4
-7,"Kirkegata 52, 0105 Oslo",Alna,5431093,2024-03-26,110,4
-8,"Karl Johans gate 17, 0154 Oslo",Østensjø,8674628,2022-10-20,163,5
-9,"Gabels gate 108, 0152 Oslo",Nordstrand,5926327,2023-10-05,101,1
-10,"Frognerveien 130, 0103 Oslo",Alna,8458791,2023-03-26,94,3
-11,"Karl Johans gate 157, 0153 Oslo",Bjerke,7064499,2024-03-02,47,4
-12,"Bjølsens gate 194, 0151 Oslo",Søndre Aker,6192307,2023-10-23,149,4
-13,"Voksenåsveien 60, 0250 Oslo",Tøyen,5910653,2024-07-27,79,4
-14,"Akershusveien 40, 0104 Oslo",Rodeløkka,9424530,2024-05-12,100,2
-15,"Grensen 122, 0102 Oslo",Ullern,4723290,2021-05-10,207,6
-16,"Drammensveien 42, 0103 Oslo",Frogner,14312095,2023-10-21,53,3
-17,"Hoffsveien 79, 0153 Oslo",Alna,9061554,2023-09-04,177,5
-18,"Voksenåsveien 175, 0251 Oslo",Østensjø,5571206,2021-09-06,116,1
-19,"Bygdøyveien 95, 0150 Oslo",Nordstrand,3329762,2020-02-02,174,5
-20,"Arendalsgata 138, 0152 Oslo",Sentrum,21199000,2024-04-19,173,3
-21,"Odins gate 171, 0102 Oslo",Sentrum,12821830,2024-09-10,60,2
-22,"Universitetsgata 76, 0105 Oslo",Sagene,5466189,2024-08-01,48,2
-23,"Karl Johans gate 197, 0104 Oslo",Alna,5327641,2024-11-18,207,4
-24,"Arendalsgata 139, 0152 Oslo",Bjerke,6603883,2024-02-10,158,2
-25,"Briskebyveien 94, 0105 Oslo",Sentrum,9213004,2024-11-09,207,3
-26,"Schweigaards gate 124, 0150 Oslo",Lambertseter,5655410,2021-09-03,126,6
-27,"Bjølsens gate 18, 0252 Oslo",Tøyen,8094218,2023-03-09,98,2
-28,"Odins gate 187, 0151 Oslo",Alna,5530960,2023-11-24,106,3
-29,"Bjølsens gate 113, 0153 Oslo",Rodeløkka,5508778,2024-04-24,141,6
-30,"Prinsens gate 77, 0154 Oslo",Alna,3853391,2023-12-07,183,3
-31,"Odins gate 40, 0154 Oslo",St Hanshaugen,10080466,2022-08-20,132,2
-32,"Frognerveien 79, 0151 Oslo",Støren,3520946,2022-06-04,67,1
-33,"Holmenveien 10, 0103 Oslo",Grevling,6092987,2024-09-23,153,2
-34,"Bohrs gate 30, 0101 Oslo",Groruddal,6587014,2023-08-14,88,1
-35,"Bygdøy Allé 108, 0251 Oslo",Grünerløkka,7110696,2024-01-19,177,2
-36,"Drammensveien 146, 0150 Oslo",Sagene,7019471,2024-09-04,128,5
-37,"Briskebyveien 115, 0101 Oslo",Bjerke,7558219,2022-09-23,116,3
-38,"Dronningens gate 48, 0252 Oslo",Groruddal,8889030,2024-07-02,102,1
-39,"Hoffsveien 85, 0151 Oslo",Ullern,10226691,2024-08-21,91,2
-40,"Voksenåsveien 86, 0252 Oslo",Frogner,18534510,2024-03-20,143,4
-41,"Holmenveien 118, 0101 Oslo",Rodeløkka,6610036,2023-12-11,44,3
-42,"Arendalsgata 63, 0104 Oslo",Sagene,5634048,2024-10-21,70,3
-43,"Bygdøy Allé 81, 0151 Oslo",Nordre Aker,3628860,2023-08-27,65,2
-44,"Universitetsgata 150, 0104 Oslo",Frogner,15754258,2022-12-08,115,1
-45,"Prinsens gate 23, 0252 Oslo",St Hanshaugen,6459889,2023-03-11,51,1
-46,"Drammensveien 85, 0151 Oslo",Tøyen,9739710,2021-11-13,116,2
-47,"Bohrs gate 102, 0101 Oslo",Gryland,6453636,2024-08-15,45,3
-48,"Holmenveien 84, 0105 Oslo",Sentrum,17177917,2024-03-18,68,2
-49,"Bygdøyveien 178, 0152 Oslo",Groruddal,7704530,2023-12-23,185,3
-50,"St Olavs plass 7, 0101 Oslo",Nordstrand,4878273,2024-12-28,237,2
-51,"Camillo Collets vei 86, 0102 Oslo",Alna,5891472,2024-06-11,203,3
-52,"Schweigaards gate 103, 0101 Oslo",Østensjø,5034946,2024-01-22,189,2
-53,"Drammensveien 101, 0151 Oslo",Bjerke,4598270,2024-04-26,116,4
-54,"Grensen 178, 0104 Oslo",Groruddal,9625082,2024-11-06,176,2
-55,"Schweigaards gate 183, 0252 Oslo",St Hanshaugen,8675894,2023-06-12,226,3
-56,"Hoffsveien 198, 0252 Oslo",Alna,9104437,2024-09-01,56,2
-57,"Borgundsdalsveien 132, 0150 Oslo",Lambertseter,6802526,2024-03-22,75,3
-58,"Karl Johans gate 47, 0250 Oslo",Alna,5203838,2024-12-07,93,3
-59,"Odins gate 141, 0154 Oslo",Bjerke,3660965,2022-12-25,108,2
-60,"Schweigaards gate 11, 0102 Oslo",Alna,11462984,2024-05-18,220,6
-61,"Universitetsgata 164, 0102 Oslo",Manglerud,9793642,2023-01-07,84,4
-62,"Øvre Slottsgate 108, 0102 Oslo",Tøyen,7469886,2024-03-04,229,2
-63,"Hoffsveien 86, 0152 Oslo",Støren,6395233,2023-09-26,177,3
-64,"Myntgata 137, 0101 Oslo",Tøyen,6113113,2024-10-07,108,4
-65,"Øvre Slottsgate 104, 0153 Oslo",Østensjø,7262541,2024-11-03,78,3
-66,"Schweigaards gate 99, 0250 Oslo",Sagene,3675134,2023-11-19,240,4
-67,"Bohrs gate 118, 0150 Oslo",Manglerud,3377445,2023-07-18,247,2
-68,"Camillo Collets vei 86, 0154 Oslo",Nordstrand,4503535,2024-03-05,71,2
-69,"Briskebyveien 97, 0105 Oslo",Nordre Aker,4701601,2022-09-14,47,1
-70,"Drammensveien 96, 0150 Oslo",Tøyen,10955093,2020-03-22,65,4
-71,"Niels Juels gate 81, 0153 Oslo",Rodeløkka,5497718,2023-03-03,91,4
-72,"Arendalsgata 32, 0102 Oslo",Nordstrand,6604731,2024-12-17,225,5
-73,"Schweigaards gate 125, 0105 Oslo",Alna,8267402,2023-12-04,101,1
-74,"Markveien 136, 0250 Oslo",Søndre Aker,5626685,2021-01-22,50,1
-75,"Holmenveien 59, 0153 Oslo",Søndre Aker,7209118,2023-06-11,95,1
-76,"Grensen 25, 0103 Oslo",Sentrum,17031719,2023-03-07,203,2
-77,"Kirkegata 94, 0251 Oslo",Rodeløkka,4346002,2024-10-05,89,5
-78,"Bjølsens gate 147, 0102 Oslo",Nordre Aker,4085392,2023-01-03,204,5
-79,"Frognerveien 164, 0252 Oslo",Søndre Aker,4506266,2024-05-20,205,5
-80,"Voksenåsveien 130, 0252 Oslo",Ullern,4078882,2023-07-13,96,5
-81,"Bohrs gate 13, 0153 Oslo",Gryland,5936746,2024-05-12,144,5
-82,"Thorvald Meyers gate 16, 0150 Oslo",Lambertseter,5779894,2022-04-24,92,4
-83,"Bohrs gate 174, 0251 Oslo",Rodeløkka,5780580,2024-03-20,169,6
-84,"Arendalsgata 49, 0103 Oslo",Grünerløkka,11743634,2024-02-08,189,6
-85,"Niels Juels gate 120, 0251 Oslo",Grevling,6619883,2024-08-09,147,3
-86,"Markveien 85, 0153 Oslo",Sentrum,12056939,2024-02-25,84,3
-87,"St Olavs plass 13, 0104 Oslo",Østensjø,5031412,2024-05-18,215,5
-88,"Gabels gate 106, 0103 Oslo",Søndre Aker,4830545,2024-01-02,141,6
-89,"Arendalsgata 199, 0252 Oslo",Gryland,6808558,2022-12-26,98,1
-90,"Odins gate 192, 0251 Oslo",Søndre Aker,4143185,2024-11-21,76,4
-91,"Bygdøy Allé 16, 0150 Oslo",Tøyen,16223205,2024-12-10,202,4
-92,"Drammensveien 60, 0250 Oslo",Gryland,8642429,2023-01-02,103,2
-93,"Øvre Slottsgate 13, 0150 Oslo",Ullern,7089932,2024-02-04,87,3
-94,"Øvre Slottsgate 191, 0104 Oslo",St Hanshaugen,7106581,2021-09-26,125,3
-95,"Akershus Festning 26, 0150 Oslo",Bjerke,4305925,2021-11-25,89,4
-96,"Markveien 21, 0153 Oslo",Ullern,9443783,2024-12-13,130,5
-97,"Bygdøy Allé 148, 0250 Oslo",St Hanshaugen,6798100,2020-07-01,204,4
-98,"Thorvald Meyers gate 14, 0250 Oslo",Grevling,9488653,2024-02-26,120,4
-99,"Markveien 89, 0152 Oslo",St Hanshaugen,5904630,2024-09-16,45,1
-100,"Drammensveien 117, 0154 Oslo",Rodeløkka,7615850,2024-07-28,110,6
-101,"Grensen 29, 0102 Oslo",Østensjø,3829654,2023-10-01,230,5
-102,"Dronningens gate 42, 0103 Oslo",Manglerud,4687286,2024-05-22,238,2
-103,"Bjølsens gate 5, 0102 Oslo",Nordstrand,6323532,2024-06-22,72,2
-104,"Drammensveien 49, 0101 Oslo",Bjerke,5950005,2022-11-04,89,2
-105,"Arendalsgata 65, 0152 Oslo",Sagene,7688840,2022-10-19,67,1
-106,"St Olavs plass 34, 0250 Oslo",Alna,6824444,2023-12-20,121,6
-107,"Universitetsgata 153, 0250 Oslo",Rodeløkka,5627744,2022-02-08,38,3
-108,"Gabels gate 76, 0251 Oslo",Sagene,5809034,2023-10-25,244,3
-109,"Thorvald Meyers gate 186, 0101 Oslo",Alna,2839702,2024-05-27,224,2
-110,"Universitetsgata 193, 0105 Oslo",Nordstrand,6930747,2023-04-13,160,4
-111,"Bygdøynesveien 166, 0151 Oslo",Sagene,8822297,2023-11-04,106,4
-112,"Akershusveien 36, 0251 Oslo",Frogner,17841430,2024-11-24,182,6
-113,"Bohrs gate 43, 0101 Oslo",Sagene,3847525,2021-06-01,36,1
-114,"Universitetsgata 75, 0153 Oslo",Sagene,4370957,2022-09-13,52,3
-115,"Karl Johans gate 145, 0103 Oslo",Støren,6278924,2021-05-06,40,3
-116,"Gabels gate 107, 0152 Oslo",Frogner,17953561,2024-04-05,107,1
-117,"Karl Johans gate 137, 0152 Oslo",Bjerke,4301268,2021-09-03,78,1
-118,"Briskebyveien 158, 0151 Oslo",Frogner,17977966,2024-08-22,119,5
-119,"Bygdøyveien 176, 0151 Oslo",Ullern,6354231,2020-08-21,214,6
-120,"Schweigaards gate 155, 0150 Oslo",Bjerke,4352828,2023-09-06,102,3
-121,"Grensen 109, 0101 Oslo",Bjerke,5307685,2023-08-10,109,3
-122,"Arendalsgata 155, 0154 Oslo",Sentrum,21562610,2024-07-09,135,3
-123,"Grensen 16, 0251 Oslo",St Hanshaugen,7384870,2020-02-05,105,2
-124,"Niels Juels gate 78, 0101 Oslo",Nordre Aker,5587199,2024-02-05,53,1
-125,"Akershus Festning 46, 0250 Oslo",Søndre Aker,7608426,2024-02-02,165,3
-126,"Bjølsens gate 95, 0105 Oslo",St Hanshaugen,13360520,2024-10-03,148,2
-127,"Voksenåsveien 3, 0101 Oslo",Rodeløkka,9035935,2024-06-24,228,2
-128,"Niels Juels gate 5, 0103 Oslo",Gryland,3883751,2021-09-07,45,4
-129,"Akershusveien 78, 0102 Oslo",Rodeløkka,4211313,2023-09-25,55,2
-130,"Universitetsgata 14, 0101 Oslo",Sentrum,17250331,2023-07-03,48,3
-131,"Camillo Collets vei 130, 0105 Oslo",Gryland,7804795,2022-10-19,231,2
-132,"Holmenveien 44, 0252 Oslo",Ullern,5943779,2024-12-05,178,3
-133,"Bohrs gate 190, 0101 Oslo",Grevling,3455319,2024-11-01,199,3
-134,"Niels Juels gate 156, 0151 Oslo",Nordstrand,3825122,2020-12-24,58,2
-135,"Kirkegata 198, 0251 Oslo",St Hanshaugen,15320124,2023-11-01,51,1
-136,"Universitetsgata 41, 0153 Oslo",Bjerke,4020537,2022-01-05,43,4
-137,"Bjølsens gate 112, 0150 Oslo",St Hanshaugen,12366659,2023-04-19,243,3
-138,"Karl Johans gate 60, 0104 Oslo",Østensjø,6089711,2020-02-03,85,3
-139,"Bygdøynesveien 135, 0103 Oslo",Nordstrand,9447940,2023-09-18,198,2
-140,"Akershus Festning 28, 0252 Oslo",Frogner,15549652,2022-08-23,73,3
-141,"Slemdalsveien 183, 0251 Oslo",Groruddal,8310432,2024-11-10,136,6
-142,"Akershus Festning 100, 0102 Oslo",Alna,8979949,2023-10-17,160,2
-143,"Holmenveien 152, 0153 Oslo",Alna,4198339,2023-01-10,116,1
-144,"Frognerveien 96, 0153 Oslo",Tøyen,8599018,2024-01-09,140,3
-145,"Myntgata 100, 0252 Oslo",Nordre Aker,8887191,2024-04-13,236,4
-146,"Universitetsgata 72, 0151 Oslo",Frogner,9618862,2022-08-26,123,6
-147,"Thorvald Meyers gate 119, 0105 Oslo",St Hanshaugen,8428790,2024-12-13,232,6
-148,"St Olavs plass 108, 0101 Oslo",Sagene,8433345,2024-09-24,62,3
-149,"Bygdøy Allé 163, 0102 Oslo",Ullern,7850504,2021-11-08,63,4
-150,"Niels Juels gate 32, 0101 Oslo",Manglerud,3593002,2023-07-07,108,4
+1,"Prinsens gate 88, 0151 Oslo",Nordre Aker,8258145,2022-05-07,78,3
+2,"Briskebyveien 131, 0105 Oslo",Gryland,4394735,2022-06-15,208,6
+3,"Borgundsdalsveien 115, 0152 Oslo",Bjerke,10173309,2024-03-09,73,1
+4,"Akershusveien 110, 0103 Oslo",Søndre Aker,7949366,2023-11-25,194,2
+5,"Kirkegata 46, 0104 Oslo",Grünerløkka,16163256,2022-09-14,248,2
+6,"Bygdøyveien 121, 0153 Oslo",Bjerke,4578030,2022-03-28,144,4
+7,"Bjølsens gate 131, 0250 Oslo",St Hanshaugen,8419040,2023-10-19,49,4
+8,"Schweigaards gate 142, 0102 Oslo",Nordre Aker,5542200,2024-08-27,69,1
+9,"Schweigaards gate 197, 0153 Oslo",St Hanshaugen,9555804,2022-12-21,90,5
+10,"Voksenåsveien 83, 0101 Oslo",Bjerke,3755473,2024-02-03,155,6
+11,"St Olavs plass 107, 0101 Oslo",Gryland,6488560,2023-12-08,110,1
+12,"Slemdalsveien 199, 0152 Oslo",Sentrum,16754689,2024-05-23,102,2
+13,"Gabels gate 6, 0104 Oslo",Groruddal,5631861,2023-05-23,190,6
+14,"Hoffsveien 31, 0252 Oslo",Gryland,6579834,2021-08-09,180,5
+15,"Bygdøynesveien 66, 0250 Oslo",Nordre Aker,4025363,2024-07-25,76,2
+16,"Akershusveien 81, 0251 Oslo",Ullern,5199162,2021-02-16,85,4
+17,"Akershus Festning 10, 0250 Oslo",Grünerløkka,9107962,2024-05-10,70,3
+18,"Bjølsens gate 49, 0101 Oslo",Rodeløkka,10015047,2024-06-01,94,3
+19,"Grensen 7, 0101 Oslo",Sentrum,21943946,2024-05-03,180,4
+20,"Gabels gate 136, 0252 Oslo",Tøyen,10640320,2023-06-04,78,1
+21,"Øvre Slottsgate 56, 0252 Oslo",St Hanshaugen,11417206,2024-06-08,63,2
+22,"Odins gate 149, 0152 Oslo",Bjerke,6281786,2024-08-03,107,4
+23,"Odins gate 101, 0152 Oslo",Grevling,7806636,2023-08-03,101,4
+24,"Thorvald Meyers gate 162, 0104 Oslo",Lambertseter,4102693,2024-10-25,83,3
+25,"Bygdøy Allé 59, 0150 Oslo",Gryland,4759724,2024-01-11,174,5
+26,"Drammensveien 174, 0101 Oslo",Nordstrand,6409867,2024-06-06,67,3
+27,"Arendalsgata 108, 0152 Oslo",Grünerløkka,11382940,2022-02-28,250,3
+28,"Arendalsgata 27, 0150 Oslo",Støren,8145986,2024-11-22,126,6
+29,"Borgundsdalsveien 45, 0101 Oslo",Støren,6245638,2024-07-13,50,4
+30,"Universitetsgata 71, 0103 Oslo",Nordre Aker,7013784,2024-08-09,57,4
+31,"Thorvald Meyers gate 62, 0101 Oslo",Lambertseter,8688230,2024-09-08,192,2
+32,"Markveien 148, 0151 Oslo",Groruddal,7137110,2020-08-04,135,6
+33,"Dronningens gate 185, 0251 Oslo",Nordstrand,8626990,2021-04-10,171,3
+34,"Øvre Slottsgate 192, 0251 Oslo",Frogner,14659571,2022-05-07,106,2
+35,"Akershusveien 155, 0105 Oslo",Tøyen,8314888,2022-06-05,243,6
+36,"Prinsens gate 49, 0104 Oslo",Rodeløkka,6564798,2024-04-09,97,2
+37,"Hoffsveien 133, 0105 Oslo",Bjerke,7864258,2023-07-08,150,2
+38,"Bygdøyveien 54, 0151 Oslo",Lambertseter,5333682,2022-07-08,79,3
+39,"Markveien 62, 0105 Oslo",Nordre Aker,5256593,2023-10-15,103,5
+40,"Niels Juels gate 3, 0104 Oslo",Lambertseter,5944472,2024-12-11,159,3
+41,"St Olavs plass 123, 0152 Oslo",Rodeløkka,3638213,2024-05-13,116,2
+42,"Thorvald Meyers gate 31, 0252 Oslo",Frogner,16097893,2024-09-22,108,3
+43,"Akershusveien 38, 0152 Oslo",Gryland,9911309,2023-10-17,134,3
+44,"Frognerveien 54, 0153 Oslo",St Hanshaugen,7313775,2024-05-26,69,3
+45,"Dronningens gate 101, 0102 Oslo",Gryland,7319425,2024-09-27,157,6
+46,"Gabels gate 134, 0102 Oslo",Søndre Aker,4743693,2024-11-27,45,3
+47,"Gabels gate 110, 0104 Oslo",Østensjø,8008521,2023-12-21,162,6
+48,"St Olavs plass 137, 0105 Oslo",Rodeløkka,3574154,2021-01-01,146,5
+49,"Grensen 166, 0104 Oslo",Grünerløkka,5058768,2024-04-22,65,3
+50,"Drammensveien 56, 0102 Oslo",Frogner,13494954,2022-05-12,238,6
+51,"Kirkegata 33, 0101 Oslo",Frogner,10627444,2024-08-28,82,3
+52,"Akershus Festning 70, 0151 Oslo",Nordre Aker,5385920,2024-04-04,105,4
+53,"Dronningens gate 109, 0153 Oslo",Gryland,5349240,2023-05-22,136,6
+54,"Karl Johans gate 103, 0151 Oslo",Frogner,18952821,2024-09-09,204,5
+55,"Akershusveien 78, 0153 Oslo",Sagene,8451442,2023-11-26,51,3
+56,"Hoffsveien 43, 0152 Oslo",Tøyen,10074240,2023-04-06,112,3
+57,"Karl Johans gate 77, 0153 Oslo",Manglerud,6615799,2021-03-16,214,2
+58,"Øvre Slottsgate 189, 0154 Oslo",Bjerke,6108094,2023-02-15,216,2
+59,"Niels Juels gate 61, 0152 Oslo",Søndre Aker,8630814,2022-02-21,43,3
+60,"Akershus Festning 144, 0150 Oslo",Nordstrand,6627628,2022-05-17,59,1
+61,"Øvre Slottsgate 126, 0151 Oslo",Alna,4908528,2024-11-12,140,3
+62,"Arendalsgata 155, 0152 Oslo",Østensjø,6057257,2020-10-19,156,6
+63,"Thorvald Meyers gate 165, 0102 Oslo",Grünerløkka,6963788,2024-06-16,246,5
+64,"Camillo Collets vei 114, 0252 Oslo",Bjerke,5268764,2023-12-12,38,1
+65,"Bjølsens gate 1, 0151 Oslo",Bjerke,9136800,2021-12-05,184,3
+66,"Bjølsens gate 36, 0251 Oslo",Bjerke,5808754,2024-08-21,66,2
+67,"Akershus Festning 113, 0252 Oslo",Østensjø,7626126,2024-05-01,139,2
+68,"Slemdalsveien 77, 0150 Oslo",Gryland,5026338,2022-08-14,55,1
+69,"Holmenveien 163, 0103 Oslo",Grünerløkka,6570946,2023-08-11,98,3
+70,"St Olavs plass 111, 0101 Oslo",Gryland,6647359,2022-10-15,136,2
+71,"Bygdøyveien 28, 0150 Oslo",Sagene,9681647,2021-11-12,191,6
+72,"Holmenveien 28, 0251 Oslo",Nordstrand,5495568,2023-04-08,73,4
+73,"Bjølsens gate 49, 0250 Oslo",Bjerke,4993058,2024-03-05,51,4
+74,"Camillo Collets vei 85, 0250 Oslo",Søndre Aker,5289170,2023-07-12,94,6
+75,"Frognerveien 74, 0103 Oslo",Sentrum,12449949,2022-04-02,127,3
+76,"Bygdøyveien 1, 0151 Oslo",Nordstrand,7905108,2024-01-03,103,3
+77,"Øvre Slottsgate 187, 0153 Oslo",Manglerud,4084580,2023-09-18,88,1
+78,"Holmenveien 39, 0154 Oslo",Frogner,14498984,2023-09-09,117,3
+79,"Borgundsdalsveien 128, 0151 Oslo",Bjerke,11078990,2023-09-28,58,4
+80,"Bygdøynesveien 10, 0252 Oslo",Østensjø,4994065,2023-01-14,95,3
+81,"Thorvald Meyers gate 129, 0103 Oslo",Manglerud,9154127,2023-03-21,68,2
+82,"Bohrs gate 79, 0152 Oslo",Ullern,9043763,2023-09-26,78,1
+83,"Kirkegata 180, 0252 Oslo",Sentrum,21844770,2024-04-06,65,2
+84,"Holmenveien 62, 0251 Oslo",Grevling,5079236,2024-01-07,60,2
+85,"Briskebyveien 39, 0153 Oslo",Bjerke,6828828,2023-11-13,43,3
+86,"Bygdøynesveien 136, 0102 Oslo",Søndre Aker,8598891,2021-09-07,182,3
+87,"Drammensveien 9, 0154 Oslo",Sentrum,20506899,2024-07-27,59,2
+88,"Markveien 27, 0150 Oslo",Gryland,8339129,2023-04-08,240,4
+89,"Bygdøyveien 105, 0152 Oslo",Nordstrand,3920089,2024-09-11,50,1
+90,"Borgundsdalsveien 89, 0150 Oslo",Bjerke,3597480,2023-01-08,88,2
+91,"Drammensveien 64, 0250 Oslo",Støren,8502084,2024-07-16,153,6
+92,"Bygdøyveien 102, 0153 Oslo",Groruddal,8276210,2024-10-08,51,4
+93,"Drammensveien 198, 0151 Oslo",Bjerke,5111241,2023-12-15,88,4
+94,"Akershus Festning 101, 0105 Oslo",St Hanshaugen,5650274,2024-12-11,248,3
+95,"Universitetsgata 149, 0101 Oslo",Manglerud,6304803,2024-08-05,43,2
+96,"St Olavs plass 135, 0103 Oslo",Rodeløkka,5924180,2023-12-28,102,1
+97,"Hoffsveien 5, 0251 Oslo",Grünerløkka,5918967,2023-11-23,115,2
+98,"Grensen 177, 0102 Oslo",Søndre Aker,8160494,2023-10-10,116,3
+99,"Akershusveien 131, 0251 Oslo",Nordre Aker,7540945,2024-07-06,78,3
+100,"Bygdøyveien 123, 0104 Oslo",Bjerke,5017195,2020-11-07,110,4
+101,"Camillo Collets vei 188, 0102 Oslo",Sentrum,19150285,2023-11-20,71,1
+102,"Camillo Collets vei 68, 0103 Oslo",Bjerke,4276689,2024-11-06,222,5
+103,"Karl Johans gate 125, 0104 Oslo",Ullern,5030713,2024-12-15,44,3
+104,"Prinsens gate 34, 0151 Oslo",Nordstrand,7512769,2024-10-28,72,1
+105,"Universitetsgata 88, 0252 Oslo",Grevling,4764123,2024-09-07,111,1
+106,"Drammensveien 70, 0250 Oslo",Sentrum,18032441,2024-03-11,59,3
+107,"Drammensveien 52, 0151 Oslo",Frogner,13932633,2023-02-11,113,3
+108,"Holmenveien 127, 0104 Oslo",Søndre Aker,8012260,2022-07-07,112,4
+109,"Odins gate 184, 0103 Oslo",Grevling,5616186,2024-10-04,152,6
+110,"Universitetsgata 95, 0103 Oslo",Manglerud,3801728,2023-01-02,126,3
+111,"Gabels gate 164, 0153 Oslo",St Hanshaugen,13293061,2023-07-15,118,3
+112,"Kirkegata 140, 0250 Oslo",Gryland,5482795,2023-07-26,211,5
+113,"Frognerveien 6, 0251 Oslo",Sagene,6644952,2023-02-04,35,2
+114,"Bygdøynesveien 13, 0252 Oslo",Alna,7763300,2022-04-22,197,5
+115,"Gabels gate 178, 0250 Oslo",Grevling,5536261,2022-08-17,70,3
+116,"Universitetsgata 19, 0250 Oslo",Nordre Aker,6050884,2024-10-28,185,5
+117,"Bygdøyveien 14, 0252 Oslo",Frogner,12460400,2024-09-27,97,5
+118,"Hoffsveien 176, 0102 Oslo",Grevling,8920789,2024-09-24,44,2
+119,"Odins gate 126, 0154 Oslo",Støren,6102980,2023-10-13,153,4
+120,"Universitetsgata 19, 0250 Oslo",Støren,8478866,2024-05-24,44,4
+121,"Slemdalsveien 138, 0251 Oslo",Bjerke,7027733,2023-10-11,163,5
+122,"Drammensveien 13, 0252 Oslo",Alna,6332499,2024-11-08,120,1
+123,"Markveien 175, 0150 Oslo",Gryland,4954242,2023-10-24,73,1
+124,"Voksenåsveien 23, 0105 Oslo",Gryland,6893043,2024-08-24,101,2
+125,"Myntgata 8, 0152 Oslo",Gryland,7260892,2024-05-28,194,2
+126,"Myntgata 87, 0251 Oslo",Grevling,7754673,2023-11-17,109,1
+127,"Schweigaards gate 182, 0102 Oslo",Tøyen,11464807,2024-09-17,141,5
+128,"Voksenåsveien 116, 0252 Oslo",Ullern,5483746,2022-11-15,44,1
+129,"Markveien 179, 0152 Oslo",Nordstrand,10369552,2024-09-01,110,2
+130,"Kirkegata 172, 0250 Oslo",Ullern,3614928,2024-12-09,216,3
+131,"Hoffsveien 5, 0252 Oslo",Gryland,6044109,2023-09-19,148,6
+132,"Bygdøynesveien 176, 0102 Oslo",Grünerløkka,10907826,2022-04-02,113,3
+133,"Kirkegata 81, 0154 Oslo",Østensjø,7602221,2024-05-16,149,2
+134,"Bjølsens gate 124, 0150 Oslo",Østensjø,7903094,2023-08-27,168,3
+135,"Bygdøyveien 3, 0103 Oslo",St Hanshaugen,6642391,2024-04-19,179,2
+136,"Thorvald Meyers gate 77, 0102 Oslo",Søndre Aker,7886860,2024-11-27,40,4
+137,"Prinsens gate 106, 0150 Oslo",Nordre Aker,5629893,2023-10-08,68,3
+138,"Øvre Slottsgate 5, 0104 Oslo",Alna,4796516,2024-12-06,142,6
+139,"Briskebyveien 42, 0101 Oslo",Nordre Aker,6851517,2024-12-21,132,5
+140,"Gabels gate 92, 0251 Oslo",Bjerke,3967883,2022-04-11,75,1
+141,"Holmenveien 141, 0250 Oslo",Nordre Aker,5678755,2021-07-24,95,1
+142,"Akershus Festning 69, 0101 Oslo",Støren,7313905,2022-12-15,84,1
+143,"Bjølsens gate 17, 0104 Oslo",Gryland,6296879,2020-06-01,111,3
+144,"Karl Johans gate 16, 0103 Oslo",Ullern,7314645,2024-11-13,187,4
+145,"Markveien 5, 0153 Oslo",Østensjø,5074472,2023-05-24,111,2
+146,"St Olavs plass 184, 0101 Oslo",Grünerløkka,12990074,2021-08-22,90,4
+147,"Prinsens gate 27, 0250 Oslo",Ullern,10662933,2023-06-19,192,3
+148,"Akershus Festning 34, 0153 Oslo",Groruddal,3768320,2023-12-02,79,4
+149,"Kirkegata 189, 0150 Oslo",Søndre Aker,6776791,2022-11-13,72,2
+150,"Kirkegata 77, 0150 Oslo",Alna,5868260,2024-10-18,135,3

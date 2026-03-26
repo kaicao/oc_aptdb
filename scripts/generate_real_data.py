@@ -13,7 +13,6 @@ import random
 def get_norwegian_real_estate_data():
     """Collect real Norwegian real estate transaction data"""
     
-    # Norwegian Municipal Property Register (Kartverket) - Simplified API
     print("=== Fetching Norwegian Real Estate Data ===")
     
     # Generate realistic Oslo real estate transaction data
@@ -23,6 +22,8 @@ def get_norwegian_real_estate_data():
         "Nordre Aker", "Søndre Aker", "Østensjø", "Grevling", "Støren",
         "Alna", "Groruddal", "Lambertseter", "Manglerud", "Rodeløkka"
     ]
+    
+    all_transactions = []  # Global list to collect all transactions
     
     # Real Oslo street names with addresses
     oslo_streets = [
@@ -59,8 +60,10 @@ def get_norwegian_real_estate_data():
             base_price = random.randint(4000000, 10000000)   # Standard areas
         
         # Generate transaction history (1-5 transactions per apartment)
-        transactions = []
+        apartment_transactions = []
         num_transactions = random.randint(1, 5)
+        
+        print(f"Apartment {i}: Generating {num_transactions} transactions")
         
         for j in range(num_transactions):
             # Generate realistic transaction dates (2020-2024)
@@ -80,7 +83,7 @@ def get_norwegian_real_estate_data():
                 area = random.randint(80, 250)
                 bedrooms = random.randint(2, 6)
             
-            transactions.append({
+            transaction = {
                 "id": transaction_id,
                 "apartment_id": i,
                 "price": transaction_price,
@@ -88,12 +91,14 @@ def get_norwegian_real_estate_data():
                 "area_sqm": area,
                 "bedrooms": bedrooms,
                 "property_type": "apartment" if area < 150 else "house"
-            })
+            }
+            apartment_transactions.append(transaction)
+            all_transactions.append(transaction)
             transaction_id += 1
         
         # Sort transactions by date (most recent first)
-        transactions.sort(key=lambda x: x['transaction_date'], reverse=True)
-        latest_transaction = transactions[0]
+        apartment_transactions.sort(key=lambda x: x['transaction_date'], reverse=True)
+        latest_transaction = apartment_transactions[0]
         
         apartments_data.append({
             "id": i,
@@ -105,11 +110,11 @@ def get_norwegian_real_estate_data():
             "transaction_date": latest_transaction["transaction_date"],
             "area_sqm": latest_transaction["area_sqm"],
             "bedrooms": latest_transaction["bedrooms"],
-            "bathrooms": random.randint(1, max(1, bedrooms)),
+            "bathrooms": random.randint(1, max(1, latest_transaction["bedrooms"])),
             "property_type": latest_transaction["property_type"]
         })
     
-    return apartments_data, transactions
+    return apartments_data, all_transactions
 
 def save_real_data():
     """Save real Norwegian data to JSON and CSV files"""
