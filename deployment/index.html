@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奥斯陆房地产平台 - 立即部署</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        const apartmentIcon = L.icon({
+            iconUrl: 'data:image/svg+xml;base64,' + btoa(`
+                <svg width="30" height="45" viewBox="0 0 30 45" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 0C6.7 0 0 6.7 0 15c0 15 15 30 15 30s15-15 15-30C30 6.7 23.3 0 15 0z" fill="#2563eb"/>
+                  <circle cx="15" cy="15" r="8" fill="white"/>
+                  <path d="M15 7l-3 6h6l-3-6z" fill="#2563eb"/>
+                </svg>
+            `),
+            iconSize: [30, 45],
+            iconAnchor: [15, 45],
+            popupAnchor: [1, -34],
+        });
+
+        const formatPrice = (price) => {
+            return new Intl.NumberFormat('no-NO', {
+                style: 'currency',
+                currency: 'NOK',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            }).format(price);
+        };
+
+        const mockApartments = [
+            {
+                id: 1, address: "Grünerløkka 15", district: "Gryland", 
+                latitude: 59.9235, longitude: 10.7530, price: 8500000,
+                transaction_date: "2024-12-15", area_sqm: 85, bedrooms: 3, bathrooms: 2,
+                property_type: "Leilighet"
+            },
+            {
+                id: 2, address: "Karl Johans gate 25", district: "Sentrum",
+                latitude: 59.9139, longitude: 10.7522, price: 12500000,
+                transaction_date: "2024-11-20", area_sqm: 120, bedrooms: 4, bathrooms: 3,
+                property_type: "Leilighet"
+            },
+            {
+                id: 3, address: "Bogstadveien 42", district: "Ullern",
+                latitude: 59.9250, longitude: 10.7200, price: 9200000,
+                transaction_date: "2024-10-10", area_sqm: 95, bedrooms: 3, bathrooms: 2,
+                property_type: "Leilighet"
+            },
+            {
+                id: 4, address: "Trondheimsveien 18", district: "Grorud",
+                latitude: 59.9300, longitude: 10.7700, price: 6800000,
+                transaction_date: "2024-09-25", area_sqm: 75, bedrooms: 2, bathrooms: 1,
+                property_type: "Leilighet"
+            },
+            {
+                id: 5, address: "Nordahl Bruns gate 8", district: "Sentrum",
+                latitude: 59.9200, longitude: 10.7400, price: 15000000,
+                transaction_date: "2024-08-15", area_sqm: 150, bedrooms: 5, bathrooms: 3,
+                property_type: "Leilighet"
+            }
+        ];
+
+        function App() {
+            const [properties, setProperties] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [selectedApartment, setSelectedApartment] = useState(null);
+            const [showHistory, setShowHistory] = useState(false);
+            const [showAnalytics, setShowAnalytics] = useState(false);
+
+            useEffect(() => {
+                setTimeout(() => {
+                    setProperties(mockApartments);
+                    setLoading(false);
+                }, 1000);
+            }, []);
+
+            useEffect(() => {
+                if (properties.length > 0 && !window.map) {
+                    const map = L.map('map').setView([59.9139, 10.7522], 12);
+                    window.map = map;
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    properties.forEach(apartment => {
+                        L.marker([apartment.latitude, apartment.longitude], { icon: apartmentIcon })
+                            .addTo(map)
+                            .bindPopup(`
+                                <div>
+                                    <h4 class="font-semibold">${apartment.address}</h4>
+                                    <p class="text-sm text-gray-600">${apartment.district}</p>
+                                    <p class="font-semibold text-green-600">${formatPrice(apartment.price)}</p>
+                                    <p class="text-sm text-gray-600">${apartment.area_sqm} m² • ${apartment.bedrooms}BR/${apartment.bathrooms}BA</p>
+                                </div>
+                            `);
+                    });
+                }
+            }, [properties]);
+
+            if (loading) {
+                return (
+                    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+                        <div className="text-center">
+                            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+                            <p className="mt-4 text-gray-600">加载奥斯陆公寓中...</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <header className="bg-white shadow-sm border-b">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center py-4">
+                                <h1 className="text-2xl font-bold text-gray-900">🏠 奥斯陆房地产平台</h1>
+                                <nav className="flex space-x-8">
+                                    <button
+                                        onClick={() => setShowAnalytics(false)}
+                                        className={`px-4 py-2 rounded-md font-medium transition-colors ${
+                                            !showAnalytics ? 'bg-blue-600 text-white' : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                    >
+                                        🏠 公寓
+                                    </button>
+                                    <button
+                                        onClick={() => setShowAnalytics(true)}
+                                        className={`px-4 py-2 rounded-md font-medium transition-colors flex items-center ${
+                                            showAnalytics ? 'bg-blue-600 text-white' : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                    >
+                                        📊 分析
+                                    </button>
+                                </nav>
+                            </div>
+                        </div>
+                    </header>
+
+                    {!showAnalytics ? (
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div className="bg-white rounded-lg shadow-sm">
+                                    <div className="p-6 border-b">
+                                        <h3 className="text-lg font-semibold">
+                                            🏠 房产列表 ({properties.length} 套)
+                                        </h3>
+                                    </div>
+                                    <div className="divide-y max-h-96 overflow-y-auto">
+                                        {properties.map((apartment) => (
+                                            <div
+                                                key={apartment.id}
+                                                className="p-6 hover:bg-gray-50 cursor-pointer"
+                                                onClick={() => setSelectedApartment(apartment)}
+                                            >
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h4 className="font-semibold text-gray-900">{apartment.address}</h4>
+                                                        <p className="text-sm text-gray-600">{apartment.district}</p>
+                                                        <p className="text-sm text-gray-600">{apartment.property_type}</p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="font-semibold text-lg text-green-600">
+                                                            {formatPrice(apartment.price)}
+                                                        </p>
+                                                        <p className="text-sm text-gray-600">
+                                                            {apartment.area_sqm} m² • {apartment.bedrooms}室/{apartment.bathrooms}卫
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="bg-white rounded-lg shadow-sm h-96">
+                                    <div className="p-6 border-b">
+                                        <h3 className="text-lg font-semibold">🗺️ 奥斯陆地图</h3>
+                                    </div>
+                                    <div id="map" style={{ height: 'calc(100% - 64px)' }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div className="bg-white rounded-lg shadow-sm p-6">
+                                <h2 className="text-2xl font-bold text-gray-900 mb-6">📊 分析仪表板</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    <div className="bg-blue-50 p-6 rounded-lg">
+                                        <h3 className="text-lg font-semibold text-blue-900">🏠 房产总数</h3>
+                                        <p className="text-3xl font-bold text-blue-600">{properties.length}</p>
+                                    </div>
+                                    <div className="bg-green-50 p-6 rounded-lg">
+                                        <h3 className="text-lg font-semibold text-green-900">💰 平均价格</h3>
+                                        <p className="text-3xl font-bold text-green-600">
+                                            {properties.length > 0 ? 
+                                                formatPrice(properties.reduce((sum, p) => sum + p.price, 0) / properties.length)
+                                                : 'N/A'
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className="bg-purple-50 p-6 rounded-lg">
+                                        <h3 className="text-lg font-semibold text-purple-900">📍 区域数量</h3>
+                                        <p className="text-3xl font-bold text-purple-600">
+                                            {[...new Set(properties.map(p => p.district))].length}
+                                        </p>
+                                    </div>
+                                    <div className="bg-orange-50 p-6 rounded-lg">
+                                        <h3 className="text-lg font-semibold text-orange-900">📐 平均面积</h3>
+                                        <p className="text-3xl font-bold text-orange-600">
+                                            {properties.length > 0 ? 
+                                                `${Math.round(properties.reduce((sum, p) => sum + p.area_sqm, 0) / properties.length)} m²`
+                                                : 'N/A'
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
