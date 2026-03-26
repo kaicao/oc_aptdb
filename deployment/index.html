@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>奥斯陆房地产平台</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -38,6 +39,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         .nav button {
             padding: 12px 24px;
@@ -107,6 +109,20 @@
             font-size: 14px;
             opacity: 0.9;
         }
+        .map-section {
+            margin-top: 30px;
+        }
+        .map-container {
+            height: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
         .stats-section {
             margin-top: 30px;
         }
@@ -149,12 +165,21 @@
             color: #1f2937;
             text-align: center;
         }
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
         @media (max-width: 768px) {
             .container { padding: 10px; }
             .property-grid { grid-template-columns: 1fr; }
             .property-details { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .nav { flex-direction: column; align-items: center; }
+            .map-container { height: 400px; }
         }
     </style>
 </head>
@@ -165,6 +190,7 @@
             <p class="subtitle">实时房价分析 | 区域趋势报告 | 投资决策支持</p>
             <div class="nav">
                 <button class="btn-active" onclick="showProperties()">🏠 公寓列表</button>
+                <button class="btn-inactive" onclick="showMap()">🗺️ 地图查看</button>
                 <button class="btn-inactive" onclick="showAnalytics()">📊 市场分析</button>
             </div>
         </div>
@@ -177,6 +203,14 @@
                 </div>
             </div>
             
+            <div id="map-section" style="display: none;">
+                <h2 class="section-title">🗺️ 交互式地图</h2>
+                <div id="map-container" class="map-container">
+                    <div id="loading-message" class="loading">🗺️ 加载地图...</div>
+                    <div id="map" style="display: none;"></div>
+                </div>
+            </div>
+            
             <div id="analytics-section" style="display: none;">
                 <h2 class="section-title">📊 市场分析报告</h2>
                 <div id="stats-grid" class="stats-grid">
@@ -186,8 +220,17 @@
         </div>
     </div>
 
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
         console.log('🚀 奥斯陆房地产平台启动中...');
+        
+        // 全局变量
+        let map = null;
+        let mapMarkers = [];
+        let leafletLoaded = false;
+        let mapInitialized = false;
         
         // 房地产数据
         const properties = [
@@ -258,6 +301,106 @@
             }
         ];
 
+        // 检查依赖是否加载
+        function checkDependencies() {
+            console.log('🔍 检查依赖...');
+            
+            // 检查 Leaflet 是否加载
+            if (typeof L === 'undefined') {
+                console.error('❌ Leaflet 库未加载');
+                return false;
+            }
+            
+            // 检查 DOM 元素
+            const mapElement = document.getElementById('map');
+            if (!mapElement) {
+                console.error('❌ 地图容器未找到');
+                return false;
+            }
+            
+            leafletLoaded = true;
+            console.log('✅ 依赖检查通过');
+            return true;
+        }
+
+        // 初始化地图
+        function initMap() {
+            console.log('🗺️ 开始初始化地图...');
+            
+            if (!checkDependencies()) {
+                console.error('❌ 依赖检查失败，无法初始化地图');
+                return false;
+            }
+            
+            try {
+                // 创建地图实例
+                console.log('📍 创建地图实例...');
+                map = L.map('map').setView([59.9139, 10.7522], 12);
+                
+                // 添加地图瓦片图层
+                console.log('🗺️ 添加地图图层...');
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                }).addTo(map);
+                
+                // 添加标记点
+                console.log('📍 添加房产标记...');
+                addPropertyMarkers();
+                
+                // 隐藏加载消息，显示地图
+                document.getElementById('loading-message').style.display = 'none';
+                document.getElementById('map').style.display = 'block';
+                
+                mapInitialized = true;
+                console.log('✅ 地图初始化完成');
+                return true;
+                
+            } catch (error) {
+                console.error('❌ 地图初始化失败:', error);
+                document.getElementById('loading-message').innerHTML = `
+                    <div class="error-message">
+                        ❌ 地图加载失败: ${error.message}
+                    </div>
+                `;
+                return false;
+            }
+        }
+
+        // 添加房产标记
+        function addPropertyMarkers() {
+            console.log('📍 为 ${properties.length} 个房产添加标记...');
+            
+            properties.forEach(property => {
+                try {
+                    const marker = L.marker([property.latitude, property.longitude])
+                        .addTo(map);
+                    
+                    // 创建弹出信息
+                    const popupContent = `
+                        <div style="font-family: Arial, sans-serif;">
+                            <h3 style="margin: 0 0 10px 0; color: #2563eb;">${property.address}</h3>
+                            <p style="margin: 0 0 5px 0;"><strong>📍 区域:</strong> ${property.district}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>💰 价格:</strong> ${formatPrice(property.price)}</p>
+                            <p style="margin: 0 0 5px 0;"><strong>📐 面积:</strong> ${property.area_sqm} m²</p>
+                            <p style="margin: 0 0 5px 0;"><strong>🛏️ 卧室:</strong> ${property.bedrooms} 间</p>
+                            <p style="margin: 0 0 5px 0;"><strong>🚿 浴室:</strong> ${property.bathrooms} 间</p>
+                            <p style="margin: 0;"><strong>📅 成交日期:</strong> ${formatDate(property.transaction_date)}</p>
+                        </div>
+                    `;
+                    
+                    marker.bindPopup(popupContent);
+                    mapMarkers.push(marker);
+                    console.log(`✅ 添加标记: ${property.address}`);
+                    
+                } catch (error) {
+                    console.error(`❌ 添加标记失败: ${property.address}`, error);
+                }
+            });
+            
+            console.log(`✅ 成功添加 ${mapMarkers.length} 个标记`);
+        }
+
         // 格式化价格
         function formatPrice(price) {
             return new Intl.NumberFormat('no-NO', {
@@ -282,6 +425,7 @@
             console.log('🏠 显示公寓列表');
             
             document.getElementById('properties-section').style.display = 'block';
+            document.getElementById('map-section').style.display = 'none';
             document.getElementById('analytics-section').style.display = 'none';
             
             // 更新按钮状态
@@ -294,11 +438,43 @@
             updateProperties();
         }
 
+        // 显示地图
+        function showMap() {
+            console.log('🗺️ 显示地图视图');
+            
+            document.getElementById('properties-section').style.display = 'none';
+            document.getElementById('map-section').style.display = 'block';
+            document.getElementById('analytics-section').style.display = 'none';
+            
+            // 更新按钮状态
+            document.querySelectorAll('.nav button').forEach(btn => {
+                btn.className = 'btn-inactive';
+            });
+            event.target.className = 'btn-active';
+            
+            // 延迟初始化地图，确保DOM完全渲染
+            setTimeout(() => {
+                if (!mapInitialized) {
+                    console.log('🔄 延迟初始化地图...');
+                    initMap();
+                } else {
+                    console.log('♻️ 地图已初始化，跳过重复初始化');
+                    setTimeout(() => {
+                        if (map) {
+                            console.log('🔄 刷新地图视图...');
+                            map.invalidateSize();
+                        }
+                    }, 100);
+                }
+            }, 500);
+        }
+
         // 显示分析报告
         function showAnalytics() {
             console.log('📊 显示市场分析');
             
             document.getElementById('properties-section').style.display = 'none';
+            document.getElementById('map-section').style.display = 'none';
             document.getElementById('analytics-section').style.display = 'block';
             
             // 更新按钮状态
@@ -322,7 +498,7 @@
             }
             
             container.innerHTML = properties.map(property => `
-                <div class="property-card">
+                <div class="property-card" onclick="showPropertyOnMap(${property.id})">
                     <div class="property-address">${property.address}</div>
                     <div class="property-district">📍 ${property.district}</div>
                     <div class="property-price">${formatPrice(property.price)}</div>
@@ -338,6 +514,33 @@
             `).join('');
             
             console.log(`✅ 成功显示 ${properties.length} 套公寓`);
+        }
+
+        // 在地图上显示房产
+        function showPropertyOnMap(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (!property) return;
+            
+            console.log(`📍 在地图上定位: ${property.address}`);
+            
+            // 切换到地图视图
+            showMap();
+            
+            // 延迟定位标记
+            setTimeout(() => {
+                if (map && mapMarkers.length > 0) {
+                    const marker = mapMarkers.find(m => 
+                        m.getLatLng().lat === property.latitude && 
+                        m.getLatLng().lng === property.longitude
+                    );
+                    
+                    if (marker) {
+                        map.setView([property.latitude, property.longitude], 15);
+                        marker.openPopup();
+                        console.log(`✅ 已定位到: ${property.address}`);
+                    }
+                }
+            }, 1000);
         }
 
         // 更新分析统计
@@ -356,7 +559,6 @@
             const avgArea = properties.reduce((sum, p) => sum + p.area_sqm, 0) / totalProperties;
             const avgPricePerSqm = avgPrice / avgArea;
             const uniqueDistricts = new Set(properties.map(p => p.district)).size;
-            const totalValue = properties.reduce((sum, p) => sum + p.price, 0);
             
             container.innerHTML = `
                 <div class="stat-card stat-blue">
@@ -398,6 +600,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM内容加载完成');
             setTimeout(initApp, 100); // 轻微延迟确保稳定
+        });
+
+        // 处理Leaflet加载完成事件
+        window.addEventListener('load', function() {
+            console.log('🌐 页面完全加载完成');
+            // 重新检查依赖
+            setTimeout(checkDependencies, 500);
         });
     </script>
 </body>

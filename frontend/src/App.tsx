@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { MapPin, Home, Search, Download, ChevronLeft, ChevronRight } from 'lucide-react'
+import { MapPin, Home, Search, Download, ChevronLeft, ChevronRight, Globe } from 'lucide-react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet'
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
+import { useTranslation, Language } from './useTranslation'
 
 // Create custom apartment icon
 const apartmentIcon = new L.Icon({
@@ -18,6 +19,38 @@ const apartmentIcon = new L.Icon({
   iconAnchor: [15, 45],
   popupAnchor: [1, -34],
 })
+
+// Language switcher component
+function LanguageSwitcher() {
+  const { i18n } = useTranslation()
+  
+  const languages = [
+    { code: 'no', name: 'Norsk', flag: '🇳🇴' },
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' }
+  ]
+  
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng as Language)
+  }
+  
+  return (
+    <div className="relative">
+      <select
+        value={i18n.language}
+        onChange={(e) => changeLanguage(e.target.value)}
+        className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      >
+        {languages.map((lang) => (
+          <option key={lang.code} value={lang.code}>
+            {lang.flag} {lang.name}
+          </option>
+        ))}
+      </select>
+      <Globe className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+    </div>
+  )
+}
 
 interface Apartment {
   id: number
@@ -65,16 +98,18 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
   }, [])
 
   if (hasError) {
+    const { t } = useTranslation()
+    
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center p-8 bg-white rounded-lg shadow-sm border max-w-md">
-          <h2 className="text-xl font-semibold text-red-600 mb-4">Something went wrong</h2>
+          <h2 className="text-xl font-semibold text-red-600 mb-4">{t('something_went_wrong')}</h2>
           <p className="text-gray-600 mb-4">{error || 'An unexpected error occurred'}</p>
           <button 
             onClick={() => window.location.reload()} 
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
-            Reload Page
+            {t('reload_page')}
           </button>
         </div>
       </div>
@@ -92,20 +127,23 @@ function MapComponent({
   onApartmentClick: (apartment: Apartment) => void 
 }) {
   const [mapError, setMapError] = useState(false)
+  const { t } = useTranslation()
   const osloCenter: [number, number] = [59.9139, 10.7522]
 
   const formatPrice = useCallback((price: number) => {
-    return new Intl.NumberFormat('no-NO', {
+    const locale = t('price_format') === '挪威克朗' ? 'zh-CN' : 'no-NO'
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: 'NOK',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(price)
-  }, [])
+  }, [t])
 
   const formatDate = useCallback((dateString: string) => {
-    return new Date(dateString).toLocaleDateString('no-NO')
-  }, [])
+    const locale = t('price_format') === '挪威克朗' ? 'zh-CN' : 'no-NO'
+    return new Date(dateString).toLocaleDateString(locale)
+  }, [t])
 
   if (mapError) {
     return (
@@ -113,18 +151,18 @@ function MapComponent({
         <div className="p-4 border-b">
           <h2 className="text-lg font-semibold flex items-center">
             <MapPin className="w-5 h-5 mr-2" />
-            Apartment Locations ({apartments.length})
+            {t('apartment_locations')} ({apartments.length})
           </h2>
         </div>
         <div className="h-96 flex items-center justify-center">
           <div className="text-center">
             <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">Map temporarily unavailable</p>
+            <p className="text-gray-600">{t('map_error')}</p>
             <button 
               onClick={() => setMapError(false)}
               className="mt-2 text-sm text-blue-600 hover:text-blue-800"
             >
-              Try again
+              {t('try_again')}
             </button>
           </div>
         </div>
@@ -137,7 +175,7 @@ function MapComponent({
       <div className="p-4 border-b">
         <h2 className="text-lg font-semibold flex items-center">
           <MapPin className="w-5 h-5 mr-2" />
-          Apartment Locations ({apartments.length})
+          {t('apartment_locations')} ({apartments.length})
         </h2>
       </div>
       <div className="h-96">
@@ -147,7 +185,6 @@ function MapComponent({
             zoom={11}
             style={{ height: '100%', width: '100%' }}
             whenReady={() => {
-              // Ensure map is properly initialized
               setTimeout(() => {
                 const map = document.querySelector('.leaflet-container')
                 if (!map) {
@@ -175,13 +212,13 @@ function MapComponent({
                     <h4 className="font-medium">{apartment.address}</h4>
                     <p className="text-sm text-gray-600">{apartment.district}</p>
                     <p className="font-bold text-blue-600">{formatPrice(apartment.price)}</p>
-                    <p className="text-sm">Area: {apartment.area_sqm} m²</p>
-                    <p className="text-sm">Date: {formatDate(apartment.transaction_date)}</p>
+                    <p className="text-sm">{t('apartment_popup.area')}: {apartment.area_sqm} m²</p>
+                    <p className="text-sm">{t('apartment_popup.date')}: {formatDate(apartment.transaction_date)}</p>
                     <button
                       onClick={() => onApartmentClick(apartment)}
                       className="mt-2 text-sm bg-blue-600 text-white px-3 py-1 rounded"
                     >
-                      View History
+                      {t('view_history')}
                     </button>
                   </div>
                 </Popup>
@@ -195,6 +232,7 @@ function MapComponent({
 }
 
 function App() {
+  const { t, i18n } = useTranslation()
   const [apartments, setApartments] = useState<Apartment[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -236,7 +274,6 @@ function App() {
       setIsLoading(false)
     } catch (error) {
       console.error('Error fetching apartments:', error)
-      // If backend is not available, show mock data
       if (axios.isAxiosError(error) && error.code === 'ECONNREFUSED') {
         setApartments(getMockData())
         setTotal(25)
@@ -313,7 +350,6 @@ function App() {
       setTransactionHistory(response.data)
     } catch (error) {
       console.error('Error fetching transaction history:', error)
-      // Mock transaction history for demo
       setTransactionHistory({
         apartment_id: apartmentId,
         apartment_address: selectedApartment?.address || 'Unknown',
@@ -339,14 +375,17 @@ function App() {
     if (!transactionHistory) return
     
     const csvContent = [
-      ['Date', 'Price (NOK)', 'Area (sqm)'],
+      [t('transaction_table_headers.date'), t('transaction_table_headers.price'), t('transaction_table_headers.area')],
       ...transactionHistory.transactions
         .sort((a, b) => new Date(b.transaction_date).getTime() - new Date(a.transaction_date).getTime())
-        .map(tx => [
-          new Date(tx.transaction_date).toLocaleDateString('no-NO'),
-          tx.price.toLocaleString('no-NO'),
-          tx.area_sqm.toString()
-        ])
+        .map(tx => {
+          const locale = i18n.language === 'zh' ? 'zh-CN' : 'no-NO'
+          return [
+            new Date(tx.transaction_date).toLocaleDateString(locale),
+            tx.price.toLocaleString(locale),
+            tx.area_sqm.toString()
+          ]
+        })
     ].map(row => row.join(',')).join('\n')
     
     const blob = new Blob([csvContent], { type: 'text/csv' })
@@ -359,7 +398,8 @@ function App() {
   }
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('no-NO', {
+    const locale = i18n.language === 'zh' ? 'zh-CN' : 'no-NO'
+    return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: 'NOK',
       minimumFractionDigits: 0,
@@ -368,7 +408,8 @@ function App() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('no-NO')
+    const locale = i18n.language === 'zh' ? 'zh-CN' : 'no-NO'
+    return new Date(dateString).toLocaleDateString(locale)
   }
 
   if (isLoading && apartments.length === 0) {
@@ -376,7 +417,7 @@ function App() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading apartments...</p>
+          <p className="mt-4 text-gray-600">{t('loading_apartments')}</p>
         </div>
       </div>
     )
@@ -392,14 +433,21 @@ function App() {
               <div className="flex items-center">
                 <Home className="w-8 h-8 text-blue-600 mr-3" />
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Oslo Apartments</h1>
-                  <p className="text-sm text-gray-600">Real Estate Transaction Data</p>
+                  <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
+                  <p className="text-sm text-gray-600">{t('subtitle')}</p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-600">
-                  Showing {Math.min((currentPage - 1) * itemsPerPage + 1, total)}-{Math.min(currentPage * itemsPerPage, total)} of {total}
-                </p>
+              <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <p className="text-sm text-gray-600">
+                    {t('showing_results', {
+                      start: Math.min((currentPage - 1) * itemsPerPage + 1, total),
+                      end: Math.min(currentPage * itemsPerPage, total),
+                      total: total
+                    })}
+                  </p>
+                </div>
+                <LanguageSwitcher />
               </div>
             </div>
           </div>
@@ -408,30 +456,30 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           {/* Search Filters */}
           <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-            <h2 className="text-lg font-semibold mb-4">Search Filters</h2>
+            <h2 className="text-lg font-semibold mb-4">{t('search_filters')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('address')}</label>
                 <input
                   type="text"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Search address..."
+                  placeholder={t('search_address_placeholder')}
                   value={searchFilters.address}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, address: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">District</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('district')}</label>
                 <input
                   type="text"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="e.g. Frogner"
+                  placeholder={t('district_placeholder')}
                   value={searchFilters.district}
                   onChange={(e) => setSearchFilters(prev => ({ ...prev, district: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">From Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('from_date')}</label>
                 <input
                   type="date"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -440,7 +488,7 @@ function App() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">To Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('to_date')}</label>
                 <input
                   type="date"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -456,13 +504,13 @@ function App() {
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md flex items-center disabled:opacity-50"
               >
                 <Search className="w-4 h-4 mr-2" />
-                Search
+                {t('search')}
               </button>
               <button
                 onClick={handleReset}
                 className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-md"
               >
-                Reset
+                {t('reset')}
               </button>
             </div>
           </div>
@@ -472,7 +520,7 @@ function App() {
             <div className="bg-white rounded-lg shadow-sm border">
               <div className="p-4 border-b">
                 <h2 className="text-lg font-semibold">
-                  Apartments ({apartments.length})
+                  {t('apartments')} ({apartments.length})
                 </h2>
               </div>
               {isLoading ? (
@@ -485,10 +533,10 @@ function App() {
                     <table className="w-full">
                       <thead className="bg-gray-50 sticky top-0">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.address')}</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.price')}</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.date')}</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('table_headers.area')}</th>
                         </tr>
                       </thead>
                       <tbody className="bg-white divide-y divide-gray-200">
@@ -524,7 +572,7 @@ function App() {
                   {/* Pagination */}
                   <div className="px-4 py-3 border-t flex items-center justify-between">
                     <div className="text-sm text-gray-700">
-                      Page {currentPage} of {totalPages}
+                      {t('page_of', { current: currentPage, total: totalPages })}
                     </div>
                     <div className="flex items-center space-x-2">
                       <button
@@ -561,7 +609,7 @@ function App() {
             <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-y-auto">
               <div className="p-6 border-b">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-semibold">Transaction History</h3>
+                  <h3 className="text-lg font-semibold">{t('transaction_history')}</h3>
                   <button
                     onClick={() => setShowHistory(false)}
                     className="text-gray-400 hover:text-gray-600 text-xl"
@@ -578,16 +626,16 @@ function App() {
                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center"
                   >
                     <Download className="w-4 h-4 mr-2" />
-                    Download CSV
+                    {t('download_csv')}
                   </button>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead className="bg-gray-50">
                       <tr>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
-                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Area</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t('transaction_table_headers.date')}</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t('transaction_table_headers.price')}</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">{t('transaction_table_headers.area')}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
