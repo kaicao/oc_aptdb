@@ -140,7 +140,7 @@ def get_finn_apartments():
                 "apartment_id": i,
                 "price": history_price,
                 "transaction_date": history_date.strftime("%Y-%m-%dT%H:%M:%S"),
-                "area_sqm": area_sqm * random.uniform(0.95, 1.05),
+                "area_sqm": area_sqm + random.randint(-2, 2),  # Realistic ±2 m² variation
                 "bedrooms": bedrooms + random.randint(-1, 1) if random.choice([True, False]) else bedrooms,
                 "property_type": property_type,
                 "market_value_at_time": history_price

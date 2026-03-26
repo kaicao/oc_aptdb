@@ -280,7 +280,7 @@ export const generateAdditionalApartments = (): Apartment[] => {
     const district = districts[i % districts.length]
     const [minPrice, maxPrice] = priceRanges[district] || [2500000, 12000000]
     const price = Math.floor(Math.random() * (maxPrice - minPrice) + minPrice)
-    const area = Math.floor(Math.random() * 175 + 25) // 25-200 m²
+    const area = Math.floor(Math.random() * 151 + 25) // 25-175 m², realistic apartment sizes
     
     additional.push({
       id: i,
@@ -392,7 +392,7 @@ export const fetchApartmentHistory = async (id: number): Promise<any> => {
         id: i + 1,
         price,
         transaction_date: date.toISOString(),
-        area_sqm: apartment.area_sqm * (0.95 + Math.random() * 0.1)
+        area_sqm: Math.round(apartment.area_sqm + (Math.random() - 0.5) * 4) // Realistic ±2 m² variation, rounded to whole number
       })
     }
     
