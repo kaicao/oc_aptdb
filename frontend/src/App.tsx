@@ -5,6 +5,10 @@ import L from 'leaflet'
 import axios from 'axios'
 import 'leaflet/dist/leaflet.css'
 import { useTranslation, Language } from './useTranslation'
+import { 
+  fetchApartments as fetchApartmentsAPI, 
+  fetchApartmentHistory
+} from './mockData'
 
 // Create custom apartment icon
 const apartmentIcon = new L.Icon({
@@ -251,10 +255,10 @@ function App() {
   const itemsPerPage = 25
 
   useEffect(() => {
-    fetchApartments()
+    loadApartments()
   }, [currentPage, searchFilters])
 
-  const fetchApartments = async () => {
+  const loadApartments = async () => {
     setIsLoading(true)
     try {
       const params = new URLSearchParams({
@@ -267,10 +271,10 @@ function App() {
       if (searchFilters.start_date) params.append('start_date', searchFilters.start_date)
       if (searchFilters.end_date) params.append('end_date', searchFilters.end_date)
       
-      const response = await axios.get(`https://oslo-apartments-api.netlify.app/apartments?${params}`)
-      setApartments(response.data.apartments)
-      setTotal(response.data.total)
-      setTotalPages(response.data.pages)
+      const data = await fetchApartmentsAPI(params.toString())
+      setApartments(data.apartments)
+      setTotal(data.total)
+      setTotalPages(data.pages)
       setIsLoading(false)
     } catch (error) {
       console.error('Error fetching apartments:', error)
@@ -329,13 +333,13 @@ function App() {
 
   const handleSearch = () => {
     setCurrentPage(1)
-    fetchApartments()
+    loadApartments()
   }
 
   const handleReset = () => {
     setSearchFilters({ address: '', district: '', start_date: '', end_date: '' })
     setCurrentPage(1)
-    fetchApartments()
+    loadApartments()
   }
 
   const handleApartmentClick = (apartment: Apartment) => {
@@ -346,8 +350,8 @@ function App() {
 
   const fetchTransactionHistory = async (apartmentId: number) => {
     try {
-      const response = await axios.get(`https://oslo-apartments-api.netlify.app/apartments/${apartmentId}/history`)
-      setTransactionHistory(response.data)
+      const response = await fetchApartmentHistory(apartmentId)
+      setTransactionHistory(response)
     } catch (error) {
       console.error('Error fetching transaction history:', error)
       setTransactionHistory({
