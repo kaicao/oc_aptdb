@@ -267,7 +267,7 @@ function App() {
       if (searchFilters.start_date) params.append('start_date', searchFilters.start_date)
       if (searchFilters.end_date) params.append('end_date', searchFilters.end_date)
       
-      const response = await axios.get(`http://localhost:8000/apartments?${params}`)
+      const response = await axios.get(`https://oslo-apartments-api.netlify.app/apartments?${params}`)
       setApartments(response.data.apartments)
       setTotal(response.data.total)
       setTotalPages(response.data.pages)
@@ -346,7 +346,7 @@ function App() {
 
   const fetchTransactionHistory = async (apartmentId: number) => {
     try {
-      const response = await axios.get(`http://localhost:8000/apartments/${apartmentId}/history`)
+      const response = await axios.get(`https://oslo-apartments-api.netlify.app/apartments/${apartmentId}/history`)
       setTransactionHistory(response.data)
     } catch (error) {
       console.error('Error fetching transaction history:', error)

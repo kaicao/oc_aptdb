@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 import random
 import json
 import os
+from sqlalchemy import Boolean
 
 # Database setup
 DATABASE_URL = "sqlite:///./oslo_realestate.db"
@@ -29,6 +30,15 @@ class ApartmentTransaction(Base):
     bedrooms = Column(Integer)
     bathrooms = Column(Integer)
     property_type = Column(String)
+    # Enhanced fields for current data
+    market_status = Column(String, default="sold")
+    year_built = Column(Integer)
+    floor = Column(Integer)
+    parking = Column(Boolean, default=False)
+    balcony = Column(Boolean, default=False)
+    energy_rating = Column(String)
+    monthly_costs = Column(Float)
+    description = Column(Text)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class PropertyTransaction(Base):
@@ -78,15 +88,17 @@ def create_real_apartments(db: Session, apartments_data: List[Dict], transaction
     db.query(ApartmentTransaction).delete()
     db.commit()
     
+    print(f"=== Loading {len(apartments_data)} real Oslo apartments ===")
+    
     # Create apartments from real data
-    for apt_data in apartments_data:
+    for i, apt_data in enumerate(apartments_data):
         # Check if apartment already exists
         existing = db.query(ApartmentTransaction).filter(
             ApartmentTransaction.address == apt_data["address"]
         ).first()
         
         if not existing:
-            # Create apartment record
+            # Create apartment record with enhanced data
             apartment = ApartmentTransaction(
                 address=apt_data["address"],
                 district=apt_data["district"],
@@ -97,11 +109,26 @@ def create_real_apartments(db: Session, apartments_data: List[Dict], transaction
                 area_sqm=apt_data["area_sqm"],
                 bedrooms=apt_data["bedrooms"],
                 bathrooms=apt_data["bathrooms"],
-                property_type=apt_data["property_type"]
+                property_type=apt_data["property_type"],
+                market_status=apt_data.get("market_status", "sold"),
+                year_built=apt_data.get("year_built"),
+                floor=apt_data.get("floor"),
+                parking=apt_data.get("parking", False),
+                balcony=apt_data.get("balcony", False),
+                energy_rating=apt_data.get("energy_rating"),
+                monthly_costs=apt_data.get("monthly_costs"),
+                description=apt_data.get("description")
             )
             db.add(apartment)
-            db.commit()
-            db.refresh(apartment)
+            
+            # Commit in batches for performance
+            if i % 50 == 0:
+                db.commit()
+                print(f"   ✅ Loaded {i + 1} apartments...")
+    
+    # Final commit
+    db.commit()
+    print(f"✅ Completed loading {len(apartments_data)} apartments")
     
     # Create transaction history from real data
     for tx_data in transactions_data:
